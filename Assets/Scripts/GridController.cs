@@ -66,7 +66,7 @@ public class GridController : MonoBehaviour
                 newPiece.transform.parent = transform;
 
                 pieces[x, y] = newPiece.GetComponent<GamePiece>();
-                pieces[x, y].Init();
+                pieces[x, y].Init(x, y, this, PieceType.NORMAL);
             }
         }
     }

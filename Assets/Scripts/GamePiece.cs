@@ -10,11 +10,13 @@ public class GamePiece : MonoBehaviour
     public int X
     {
         get { return x; }
+        set { x = value; }
     }
 
     public int Y
     {
         get { return y; }
+        set { y = value; }
     }
 
     private GridController.PieceType type;
@@ -24,9 +26,9 @@ public class GamePiece : MonoBehaviour
         get { return type; }
     }
 
-    private Grid grid;
+    private GridController grid;
 
-    public Grid GridRef
+    public GridController GridRef
     {
         get { return grid; }
     }
@@ -41,7 +43,7 @@ public class GamePiece : MonoBehaviour
         
     }
 
-    public void Init(int _x, int _y, Grid _grid, GridController.PieceType _type)
+    public void Init(int _x, int _y, GridController _grid, GridController.PieceType _type)
     {
         x = _x;
         y = _y;
