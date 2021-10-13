@@ -30,8 +30,9 @@ public class GridController : MonoBehaviour
     private Dictionary<PieceType, GameObject> piecePrefabDict;
 
     // 2D Array of GameObjects
-    private GameObject[,] pieces;
+    private GamePiece[,] pieces;
     
+    // Initialization
     private void Start()
     {
         piecePrefabDict = new Dictionary<PieceType, GameObject>();
@@ -54,15 +55,18 @@ public class GridController : MonoBehaviour
             }
         }
 
-        pieces = new GameObject[xDim, yDim];
+        pieces = new GamePiece[xDim, yDim];
         for(int x = 0; x < xDim; x++)
         {
             for(int y = 0; y < yDim; y++)
             {
-                pieces[x, y] = (GameObject)Instantiate(piecePrefabDict[PieceType.NORMAL], GetWorldPos(x, y), Quaternion.identity);
+                GameObject newPiece = (GameObject)Instantiate(piecePrefabDict[PieceType.NORMAL], GetWorldPos(x, y), Quaternion.identity);
                 // Changing Name
-                pieces[x, y].name = "Piece(" + x + "," + y + ")";
-                pieces[x, y].transform.parent = transform;
+                newPiece.name = "Piece(" + x + "," + y + ")";
+                newPiece.transform.parent = transform;
+
+                pieces[x, y] = newPiece.GetComponent<GamePiece>();
+                pieces[x, y].Init();
             }
         }
     }
