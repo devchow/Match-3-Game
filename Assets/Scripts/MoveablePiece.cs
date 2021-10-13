@@ -26,5 +26,7 @@ public class MoveablePiece : MonoBehaviour
     {
         piece.X = newX;
         piece.Y = newY;
+
+        piece.transform.localPosition = piece.GridRef.GetWorldPos(newX, newY);
     }
 }

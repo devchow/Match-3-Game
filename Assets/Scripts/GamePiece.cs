@@ -10,13 +10,25 @@ public class GamePiece : MonoBehaviour
     public int X
     {
         get { return x; }
-        set { x = value; }
+        //set { x = value; }
+        set{
+            if(IsMoveable())
+            {
+                x = value;
+            }
+        }
     }
 
     public int Y
     {
         get { return y; }
-        set { y = value; }
+        //set { y = value; }
+        set{
+            if(IsMoveable())
+            {
+                y = value;
+            }
+        }
     }
 
     private GridController.PieceType type;
@@ -31,6 +43,27 @@ public class GamePiece : MonoBehaviour
     public GridController GridRef
     {
         get { return grid; }
+    }
+
+    // ref
+    private MoveablePiece moveableComponent;
+
+    public MoveablePiece MoveableComponent
+    {
+        get { return moveableComponent; }
+    }
+
+    private ColorPiece colorComponent;
+    public ColorPiece ColorComponent
+    {
+        get { return colorComponent; }
+    }
+
+    // get ref to moveable comp
+    private void Awake()
+    {
+        moveableComponent = GetComponent<MoveablePiece>();
+        colorComponent = GetComponent<ColorPiece>();
     }
 
     void Start()
@@ -49,6 +82,17 @@ public class GamePiece : MonoBehaviour
         y = _y;
         grid = _grid;
         type = _type;
+    }
+
+    public bool IsMoveable()
+    {
+        return moveableComponent != null;
+    }
+
+    // check whether colored
+    public bool IsColored()
+    {
+        return colorComponent != null;
     }
 
 }
